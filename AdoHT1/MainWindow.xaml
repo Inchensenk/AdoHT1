@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="button1" Content="Создать БД"  Background="#FF729AEA" Margin="21,340,657,30" BorderBrush="#FFE41212" Foreground="#FF712A31"/>
+        <Button x:Name="createDBButton1" Content="Создать БД"  Background="#FF729AEA" Margin="14,340,664,30" BorderBrush="#FFE41212" Foreground="#FF712A31" Click="button1_Click"/>
         <Button x:Name="button2" Content="Наполнить БД значениями по умолчанию" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Margin="214,340,297,30" Click="button2_Click" Foreground="#FF712A31" BorderBrush="{x:Null}" />
         <TextBox HorizontalAlignment="Left" Margin="163,31,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="506" Height="32"/>
         <Label Content="Строка подключения" HorizontalAlignment="Left" Margin="21,34,0,0" VerticalAlignment="Top"/>
