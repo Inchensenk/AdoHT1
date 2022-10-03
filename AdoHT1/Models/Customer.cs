@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdoHT1
+namespace AdoHT1.Models
 {
     /// <summary>
     /// Модель хранит данные Пользолвателя
@@ -32,7 +32,7 @@ namespace AdoHT1
         /// Номер телефона
         /// </summary>
         private string _phoneNumber = null!;
-       
+
 
         /// <summary>
         /// Имя
@@ -65,9 +65,9 @@ namespace AdoHT1
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void OnPropertyChanged(string propName)
+        private void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
