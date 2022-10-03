@@ -13,26 +13,37 @@ namespace AdoHT1.Models
     internal class Customer : INotifyPropertyChanged
     {
         /// <summary>
-        /// Идентификатор
+        /// Поле: Идентификатор
         /// </summary>
         private int _id;
         
+        /// <summary>
+        /// Поле: Имя
+        /// </summary>
+        private string _name = null!;
 
         /// <summary>
-        /// Имя
+        /// Поле: Номер телефона
         /// </summary>
-        private string _name;
-
-        /// <summary>
-        /// Номер телефона
-        /// </summary>
-        private string _phoneNumber;
+        private string _phoneNumber  = null!;
 
         /*****************************************************************************************************************************************
          *****************************************************************************************************************************************/
+        /// <summary>
+        /// Свойство: Идентификатор покупателя
+        /// </summary>
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
 
         /// <summary>
-        /// Имя
+        /// Свойство: Имя
         /// </summary>
         public string Name
         {
@@ -46,7 +57,7 @@ namespace AdoHT1.Models
         }
 
         /// <summary>
-        /// Номер телефона
+        /// Свойство: Номер телефона
         /// </summary>
         public string PhoneNumber
         {
@@ -55,15 +66,47 @@ namespace AdoHT1.Models
             set
             {
                 _phoneNumber = value;
-                OnPropertyChanged(nameof(_phoneNumber));
+                OnPropertyChanged(nameof(PhoneNumber));
             }
         }
 
         /*****************************************************************************************************************************************
         *****************************************************************************************************************************************/
 
+        /// <summary>
+        /// Конструктор по умолчанию
+        /// </summary>
+        public Customer()
+        {
+            this.Id = int.MaxValue;
+            this.Name = "";
+            this.PhoneNumber = "";
+        }
+
+        /// <summary>
+        /// Конструктор с параметрами
+        /// </summary>
+        /// <param name="Id">Идентификатор</param>
+        /// <param name="Name">Имя покупателя</param>
+        /// <param name="PhoneNumber">Номер телефона покупателя</param>
+        public Customer(int Id, string Name, string PhoneNumber) : this()
+        {
+            this.Id = Id;
+            this.Name = Name;
+            this.PhoneNumber = PhoneNumber;
+        }
+        /*****************************************************************************************************************************************
+        *****************************************************************************************************************************************/
+
+        /// <summary>
+        /// Делегат-обработчик события PropertyChanged
+        /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        /// <summary>
+        /// Метод-обработчик делегата PropertyChanged
+        /// </summary>
+        /// <param name="propertyName">Имя свойства</param>
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
