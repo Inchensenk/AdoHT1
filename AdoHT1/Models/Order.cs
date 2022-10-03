@@ -14,20 +14,32 @@ namespace AdoHT1.Models
     internal class Order : INotifyPropertyChanged
     {
         /// <summary>
-        /// Идентификатор
+        /// Поле: Идентификатор
         /// </summary>
         public int _id;
 
+        /// <summary>
+        /// Поле: Сумма заказа
+        /// </summary>
         public double _summ;
 
+        /// <summary>
+        /// Поле: Дата заказа
+        /// </summary>
         public string _date;
 
+        /// <summary>
+        /// Поле: Идентификатоор покупателя
+        /// </summary>
         public int _customerId;
 
 
         /*****************************************************************************************************************************************
          *****************************************************************************************************************************************/
 
+        /// <summary>
+        /// Свойство: Идентификатор заказа
+        /// </summary>
         public int Id
         {
             get => _id;
@@ -38,6 +50,9 @@ namespace AdoHT1.Models
             }
         }
 
+        /// <summary>
+        /// Свойство: Сумма заказа
+        /// </summary>
         public double Summ
         {
             get => _summ;
@@ -48,6 +63,9 @@ namespace AdoHT1.Models
             }
         }
 
+        /// <summary>
+        /// Свойство: Дата заказа
+        /// </summary>
         public string Date
         {
             get => _date;
@@ -58,6 +76,9 @@ namespace AdoHT1.Models
             }
         }
 
+        /// <summary>
+        /// Свойство: Идентификатор покупателя
+        /// </summary>
         public int CustomerId
         {
             get => _customerId;
@@ -77,24 +98,24 @@ namespace AdoHT1.Models
         public Order()
         {
             Id = int.MaxValue;
-            CustomerId = int.MaxValue;
-            Date = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             Summ = double.MaxValue;
+            Date = DateTime.Now.ToString(CultureInfo.InvariantCulture);
+            CustomerId = int.MaxValue;
         }
+
         /// <summary>
         /// Конструктор с параметрами
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="customerId"></param>
-        /// <param name="summ"></param>
-        /// <param name="dateString"></param>
-        public Order(int id, int customerId, string dateString, double summ )
+        /// <param name="id">Идентификатор заказа</param>
+        /// <param name="summ">Сумма заказа</param>
+        /// <param name="dateString">Дата заказа</param>
+        /// /// <param name="customerId">Идентификатор покупателя</param>
+        public Order(int id, string dateString, double summ, int customerId)
         {
-            Id = id;
-            CustomerId = customerId;
-            Date = dateString;
+            Id = id; 
             Summ = summ;
-            
+            Date = dateString;
+            CustomerId = customerId;
         }
 
         /*****************************************************************************************************************************************
