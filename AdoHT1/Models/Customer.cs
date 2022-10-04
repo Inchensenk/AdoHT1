@@ -10,7 +10,7 @@ namespace AdoHT1.Models
     /// <summary>
     /// Модель хранит данные Пользолвателя
     /// </summary>
-    internal class Customer : INotifyPropertyChanged
+    public class Customer : INotifyPropertyChanged
     {
         /// <summary>
         /// Поле: Идентификатор
@@ -26,6 +26,9 @@ namespace AdoHT1.Models
         /// Поле: Номер телефона
         /// </summary>
         private string _phoneNumber  = null!;
+        private int maxValue;
+        private Customer customer;
+        private string v;
 
         /*****************************************************************************************************************************************
          *****************************************************************************************************************************************/
@@ -95,6 +98,14 @@ namespace AdoHT1.Models
             this.Name = Name;
             this.PhoneNumber = PhoneNumber;
         }
+
+        public Customer(int maxValue, Customer customer, string v)
+        {
+            this.maxValue = maxValue;
+            this.customer = customer;
+            this.v = v;
+        }
+
         /*****************************************************************************************************************************************
         *****************************************************************************************************************************************/
 

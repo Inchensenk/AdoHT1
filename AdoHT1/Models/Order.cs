@@ -11,7 +11,7 @@ namespace AdoHT1.Models
     /// <summary>
     /// Модель. Хранит данные о заказах
     /// </summary>
-    internal class Order : INotifyPropertyChanged
+    public class Order : INotifyPropertyChanged
     {
         /// <summary>
         /// Поле: Идентификатор
@@ -110,12 +110,12 @@ namespace AdoHT1.Models
         /// <param name="summ">Сумма заказа</param>
         /// <param name="dateString">Дата заказа</param>
         /// /// <param name="customerId">Идентификатор покупателя</param>
-        public Order(int id, string dateString, double summ, int customerId)
+        public Order(int id, int customerId, double summ, string dateString)
         {
-            Id = id; 
+            Id = id;
+            CustomerId = customerId;
             Summ = summ;
             Date = dateString;
-            CustomerId = customerId;
         }
 
         /*****************************************************************************************************************************************
