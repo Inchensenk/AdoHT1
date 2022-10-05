@@ -31,33 +31,21 @@ namespace AdoHT1
         public MainWindow()
         {
             InitializeComponent();
-            Connection();
+            DataContext = new MainWindowViewModel();
+            //Connection();
         }
 
-        private void Connection()
-        {
-            sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["AdoDB"].ConnectionString);
-            sqlConnection.Open();
+        //private void Connection()
+        //{
+        //    sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["AdoDB"].ConnectionString);
+        //    sqlConnection.Open();
 
-            if(sqlConnection.State == ConnectionState.Open)
-            {
-                MessageBox.Show("Подключение открыто!");
-            }
-        }
+        //    if(sqlConnection.State == ConnectionState.Open)
+        //    {
+        //        MessageBox.Show("Подключение открыто!");
+        //    }
+        //}
         
-        private void button1_Copy_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
     }
 }

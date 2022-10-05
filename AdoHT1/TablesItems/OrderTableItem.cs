@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdoHT1
+namespace AdoHT1.TablesItems
 {
-    internal class OrderTableItem : Order, INotifyPropertyChanged
+    public class OrderTableItem : Order, INotifyPropertyChanged
     {
         /// <summary>
         ///  Поле: Номер клиента в таблице-представлении

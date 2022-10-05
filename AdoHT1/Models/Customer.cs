@@ -15,17 +15,18 @@ namespace AdoHT1.Models
         /// <summary>
         /// Поле: Идентификатор
         /// </summary>
-        private int _id;
-        
+        protected int _id;
+
         /// <summary>
         /// Поле: Имя
         /// </summary>
-        private string _name = null!;
+        protected string _name = null!;
 
         /// <summary>
         /// Поле: Номер телефона
         /// </summary>
-        private string _phoneNumber  = null!;
+        protected string _phoneNumber  = null!;
+
         private int maxValue;
         private Customer customer;
         private string v;

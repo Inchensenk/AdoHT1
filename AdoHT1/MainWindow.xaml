@@ -5,14 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdoHT1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        
-        <Button x:Name="createDBButton1" Content="Создать БД"  Background="#FF729AEA" Margin="14,340,664,30" BorderBrush="#FF12E4AF" Foreground="#FF712A31" Click="button1_Click"/>
-        <Button x:Name="button2" Content="Наполнить БД значениями по умолчанию" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Margin="214,340,297,30" Click="button2_Click" Foreground="#FF712A31" BorderBrush="{x:Null}" />
-        <TextBox HorizontalAlignment="Left" Margin="163,31,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="506" Height="32"/>
-        <Label Content="Строка подключения" HorizontalAlignment="Left" Margin="21,34,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="163,94,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="506" Height="32"/>
-        <Label Content="Имя базы данных" HorizontalAlignment="Left" Margin="21,97,0,0" VerticalAlignment="Top"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="0" Grid.Row="0" x:Name="ConnectButton" Content="Connect" Command ="{Binding OnConnectButtonClickCommand}" IsEnabled="{Binding IsNotConnected}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin ="10,77,0,0" Padding="5" Height="30" Width="58"/>
+        <Button Grid.Column="0" x:Name="FillDatabaseButton" Content="Fill Database" Command="{Binding OnFillButtonClickCommand}" Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}" ToolTip="Click here if your database is fresh created and you need to fill it with generated data." HorizontalAlignment="Left" Margin="10,122,0,0" Padding="5" VerticalAlignment="Top"/>
+        <Button Grid.Column="0" x:Name="ClearDatabaseButton" Content="Clear Tables" Command="{Binding OnClearButtonClickCommand}" Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}" ToolTip="Click here if you want to clear all tables contents for good." HorizontalAlignment="Left" Margin="10,164,0,0" Padding="5" VerticalAlignment="Top"/>
+
+        <TextBox ToolTipService.ToolTip="Server Name" Grid.Column="0" Grid.Row="0" x:Name="ServerNameTextBox" Text ="{Binding ServerName, Mode=TwoWay}" VerticalAlignment="Top" Margin="10,49,57,0" TextWrapping="Wrap" RenderTransformOrigin="1.07,0.643"/>
+        <Label x:Name="ConnectionStatusLabel" Content="{Binding ConnectionStatus}" HorizontalAlignment="Center" Margin="0,9,0,0" VerticalAlignment="Top" Height="25" Width="147"/>
+
+
+
+        <DataGrid SelectedItem="{Binding SelectedCustomer}" Width="225"
+            Grid.Column="1" Name="CustomerDataGrid" ItemsSource="{Binding Path=PrimaryCustomerList, Mode=TwoWay}" ClipToBounds="True" AutoGenerateColumns="False" Margin="0" Height="400" 
+                  Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="№" Binding="{Binding Path=TableNumber, Mode=TwoWay}"/>
+                <DataGridTextColumn Width="3*"  Header ="Name" Binding="{Binding Path=Name, Mode=TwoWay}"/>
+                <DataGridTextColumn Width="4*"  Header ="Phone Number" Binding="{Binding Path=PhoneNumber, Mode=TwoWay}"/>
+            </DataGrid.Columns>
+
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding OnCustomerDataGridDeleteKeyDownCommand}"/>
+            </DataGrid.InputBindings>
+        </DataGrid>
+
+
+
+        <DataGrid  Name="OrderDataGrid" ItemsSource="{Binding Path=PrimaryOrderList, Mode=TwoWay}" Margin="0" Height="400" Width="325" AutoGenerateColumns="False" Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Column="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*"  Header ="Customer №" Binding="{Binding Path=CustomerTableNumber, Mode=TwoWay}"/>
+                <DataGridTextColumn Width="*"  Header ="Summ" Binding="{Binding Path=Summ, Mode=TwoWay}"/>
+                <DataGridTextColumn Width="1.2*"  Header ="Date" Binding="{Binding Path=Date, Mode=TwoWay}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
+        <!-- First table controls -->
+        <Button Grid.Column="1" Command="{Binding OnAddCustomerButtonClickCommand}" Grid.Row="1" Name="AddCustomerButton" Content="Add Customer" Width="60" Height="20" Margin="266,0,0,0" Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Column="1" MaxLength="24" Grid.Row="1" ToolTipService.ToolTip="Name" Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"
+            Name="CustomerNameTextBox" Text="{Binding NameAddCustomerInputField}" Margin="90,14,213,63" TextWrapping="NoWrap"/>
+        <TextBox MaxLength="13"  Grid.Column="1" Grid.Row="1" ToolTipService.ToolTip="Phone number" Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"
+            Name="CustomerPhoneNumberTextBox" Text="{Binding PhoneNumberAddCustomerInputField}" Margin="208,14,0,63" TextWrapping="Wrap" Width="118" HorizontalAlignment="Left"/>
+
+
+        <!-- Second table controls -->
+        <Button Grid.Column="2" Content="Add Order" Command="{Binding OnAddOrderButtonClickCommand}" Name="AddOrderButton"  HorizontalAlignment="Left" Margin="311,0,0,0" Grid.Row="1" VerticalAlignment="Center" 
+                Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+        <TextBox Grid.Column="2" Text="{Binding CustomerNumberAddOrderInputField}" Name="CustomerNumberTextBox" ToolTipService.ToolTip="Customer Number"  HorizontalAlignment="Left" Margin="46,14,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" Height="20" 
+                 Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+        <TextBox Grid.Column="2" Text="{Binding SummAddOrderInputField}" Name="SummTextBox" ToolTipService.ToolTip="Summ" HorizontalAlignment="Left" Margin="150,14,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" 
+                 Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}" Height="20"/>
+
+        <TextBox Grid.Column="2" Text="{Binding DateAddOrderInputField}" Name="DateTextBox" ToolTipService.ToolTip="Date (dd-mm-yyyy)" HorizontalAlignment="Left" Margin="251,14,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+                 Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}" Height="20"/>
+
+
+
+        <!-- MinMaxOverall labels -->
+        <Label Content="Min " HorizontalAlignment="Left" Margin="12,292,0,0" VerticalAlignment="Top"
+               Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Label Content="Max " HorizontalAlignment="Left" Margin="13,318,0,0" VerticalAlignment="Top"
+               Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Label Content="Overall " HorizontalAlignment="Left" Margin="13,344,0,0" VerticalAlignment="Top"
+               Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+
+        <Label Content="{Binding MinOderPriceValue}" HorizontalAlignment="Left" Margin="83,292,0,0" VerticalAlignment="Top"
+               Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Label Content="{Binding MaxOderPriceValue}" HorizontalAlignment="Left" Margin="83,318,0,0" VerticalAlignment="Top"
+               Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <Label Content="{Binding OverallOderPriceValue}" HorizontalAlignment="Left" Margin="83,344,0,0" VerticalAlignment="Top"
+               Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
     </Grid>
 </Window>
