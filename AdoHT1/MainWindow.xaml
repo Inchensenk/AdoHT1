@@ -132,7 +132,7 @@
 
 
 
-                    <Button Command="{Binding OnAddCustomerButtonClickCommand}" x:Name="AddCustomerButton" Content="Add Customer" Width="60" Height="20" Margin="176,482,0,0" Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left"/>
+                    <Button Command="{Binding OnAddCustomerButtonClickCommand}" x:Name="AddCustomerButton" Content="Add Customer" Width="90" Height="20" Margin="146,497,0,-15" Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left"/>
                     <TextBox MaxLength="24" ToolTipService.ToolTip="Name" Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"
                 x:Name="CustomerNameTextBox" Text="{Binding NameAddCustomerInputField}" Margin="0,457,123,24" TextWrapping="NoWrap"/>
                     <TextBox MaxLength="12" ToolTipService.ToolTip="Phone number" Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -154,7 +154,7 @@
 
 
 
-                    <Button Content="Add Order" Command="{Binding OnAddOrderButtonClickCommand}" x:Name="AddOrderButton" Margin="265,0,0,0" VerticalAlignment="Bottom" 
+                    <Button Content="Add Order" Command="{Binding OnAddOrderButtonClickCommand}" x:Name="AddOrderButton" Margin="266,0,0,-14" VerticalAlignment="Bottom" 
                 Visibility="{Binding IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
                     <TextBox Text="{Binding CustomerNumberAddOrderInputField}" x:Name="CustomerNumberTextBox" ToolTipService.ToolTip="Customer Number" Margin="0,457,226,24" TextWrapping="Wrap" 
