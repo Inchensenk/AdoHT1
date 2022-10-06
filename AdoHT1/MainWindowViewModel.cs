@@ -164,8 +164,8 @@ namespace AdoHT1
             get => _PhoneNumberAddCustomerInputField;
             set
             {
-                _NameAddCustomerInputField = value;
-                OnPropertyChanged(nameof(NameAddCustomerInputField));
+                _PhoneNumberAddCustomerInputField = value;
+                OnPropertyChanged(nameof(PhoneNumberAddCustomerInputField));
             }
         }
 
@@ -501,7 +501,7 @@ namespace AdoHT1
 
                 SqlParameter nameParam = new SqlParameter("@name", NameAddCustomerInputField);
 
-                if (PhoneNumberAddCustomerInputField.StartsWith("+44") && PhoneNumberAddCustomerInputField.Length == 13)
+                if (PhoneNumberAddCustomerInputField.StartsWith("+7") && PhoneNumberAddCustomerInputField.Length == 12)
                 {
                     queryString = $"USE {reservedDbName}; INSERT INTO Customers (Name, PhoneNumber) VALUES (@name, @phone);";
 
@@ -519,7 +519,7 @@ namespace AdoHT1
                 }
                 else
                 {
-                    MessageBox.Show("Wrong phone number format. It should start with '+44' and include 13 symbols at max.", "Wrong Phone Number format.", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Wrong phone number format. It should start with '+7' and include 13 symbols at max.", "Wrong Phone Number format.", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

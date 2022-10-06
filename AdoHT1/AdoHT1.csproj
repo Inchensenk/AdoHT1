@@ -8,19 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="futurama-zapp-brannigan-scruffy.jpg" />
-    <None Remove="thumb-1920-638098.jpg" />
+    <None Remove="Assets\Black.png" />
+    <None Remove="Assets\White.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Black.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\White.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.0" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="futurama-zapp-brannigan-scruffy.jpg" />
-    <Resource Include="thumb-1920-638098.jpg" />
   </ItemGroup>
 
 </Project>

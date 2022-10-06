@@ -35,6 +35,11 @@ namespace AdoHT1
             //Connection();
         }
 
+        private void OnShutdownButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         //private void Connection()
         //{
         //    sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["AdoDB"].ConnectionString);
@@ -45,7 +50,7 @@ namespace AdoHT1
         //        MessageBox.Show("Подключение открыто!");
         //    }
         //}
-        
-       
+
+
     }
 }
